@@ -1,0 +1,40 @@
+<?php
+require('../fpdf/fpdf.php');
+$pdf = new FPDF('L', 'mm', 'A4');
+$pdf->SetLeftMargin(20);
+$pdf->AddPage();
+$pdf->Image('../img/logoklinik.jpeg', $x=40, $y=0, $w=30, $h=30);
+$pdf->SetFont('Arial', 'B', 16);
+$pdf->Cell(0, 10, 'LAPORAN DATA DOKTER', 0, 10, 'C');
+$pdf->Cell(10, 7, '', 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(10, 6, 'No.', 1, 0,'C');
+$pdf->Cell(60, 6, 'Nama', 1, 0,'C');
+$pdf->Cell(30, 6, 'Kode', 1, 0,'C');
+$pdf->Cell(50, 6, 'Spesialis', 1, 0,'C');
+$pdf->Cell(45, 6, 'No Hp', 1, 0, 'C');
+$pdf->Cell(60, 6, 'Alamat', 1, 1,'C');
+$pdf->SetFont('Arial', '', 10);
+include '../connection.php';
+$no = 1;
+$result = mysqli_query($con, "SELECT * FROM dokter");
+while ($data = mysqli_fetch_array($result)) {
+    $pdf->Cell(10, 6, $no++, 1, 0,'C');
+    $pdf->Cell(60, 6, $data['nama'], 1, 0);
+    $pdf->Cell(30, 6, $data['kode'], 1, 0);
+    $pdf->Cell(50, 6, $data['spesialis'], 1, 0);
+    $pdf->Cell(45, 6, $data['nohp'], 1, 0);
+    $pdf->Cell(60, 6, $data['alamat'], 1, 1);
+}
+$pdf->Ln(5);       
+$pdf->SetFont('Times', '', 12);
+$pdf->Cell(255, 10, 'Banjarmasin, 05 Januari 2022', 0, 255, 'R');
+$pdf->Cell(240, 5, 'Hormat Kami,', 240, 5, 'R');
+$pdf->Cell(240, 5, 'Kepala Klinik', 240, 5, 'R');
+$pdf->SetFont('Times','U',12);
+$pdf->Cell(242, 40, 'AULIA ANDINI', 242, 40, 'R');
+$pdf->Cell(150);
+$pdf->Ln(-35);
+$pdf->SetFont('Times', '', 12);
+$pdf->Cell(238, 40, '2010010241', 238, 40, 'R');
+$pdf->Output();

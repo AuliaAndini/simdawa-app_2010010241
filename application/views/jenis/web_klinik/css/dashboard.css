@@ -1,0 +1,22 @@
+.backgrounddash {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 600px;
+    align-items: center;
+    font-family: sans-serif;
+    background-size: 1000px;
+}
+
+.card {
+    margin-left: 6px;
+    margin-top: 0px;
+    margin-bottom: 500px;
+    background-color: gray;
+
+}
+
+.card-header strong {
+    margin: 350px
+}
